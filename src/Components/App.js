@@ -1,6 +1,8 @@
+import SignUp from "./SignUp/SignUp";
+
 function App() {
   return (
-    "hello"
+    <SignUp/>
   );
 }
 
