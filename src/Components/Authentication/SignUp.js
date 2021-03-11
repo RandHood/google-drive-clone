@@ -1,5 +1,7 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { useAuth } from '../../Contexts/Auth';
 import { Form, Button, Card, ButtonGroup } from 'react-bootstrap';
+import { Link, useHistory } from "react-router-dom"
 
 export default function SignUp() {
     const emailRef = useRef();
@@ -11,16 +13,32 @@ export default function SignUp() {
     const companyNameRef = useRef();
     const companyNumberRef = useRef();
 
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const { signup } = useAuth();
+    const history = useHistory();
+
     async function handleSubmit(e) {
-        e.preventDefault()
-        console.log(emailRef.current.value);
-        console.log(passwordRef.current.value);
-        console.log(nameRef.current.value);
-        console.log(addressRef.current.value);
-        console.log(planRef);
-        console.log(creditCardRef.current.value);
-        console.log(companyNameRef.current.value);
-        console.log(companyNumberRef.current.value);
+        e.preventDefault();
+        try {
+            setError("");
+            setLoading(true);
+            await signup(emailRef.current.value, passwordRef.current.value);
+            history.push("/login");
+        } catch {
+            setError("Failed to create an account")
+        }
+        setLoading(false);
+
+        // console.log(emailRef.current.value);
+        // console.log(passwordRef.current.value);
+        // console.log(nameRef.current.value);
+        // console.log(addressRef.current.value);
+        // console.log(planRef);
+        // console.log(creditCardRef.current.value);
+        // console.log(companyNameRef.current.value);
+        // console.log(companyNumberRef.current.value);
+
     }
 
     function selectPlan(e) {
@@ -69,10 +87,13 @@ export default function SignUp() {
                             <Form.Label>Company Phone Number</Form.Label>
                             <Form.Control type="number" ref={companyNumberRef} required />
                         </Form.Group>
-                        <Button className="w-100" type="submit">
+                        <Button disabled={loading} className="w-100" type="submit">
                             Sign Up
                         </Button>
                     </Form>
+                    <div className="w-100 text-center mt-2">
+                        Already registered? <Link to="/login">Log In</Link>
+                    </div>
                 </Card.Body>
             </Card>
         </div>
