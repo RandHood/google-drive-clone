@@ -3,6 +3,7 @@ import { Form, Button, Card, ButtonGroup } from 'react-bootstrap';
 import { Link, useHistory } from "react-router-dom"
 import { useAuth } from '../../Contexts/Auth';
 import { database } from "../../firebase";
+import firebase from 'firebase/app';
 
 export default function SignUp() {
     const emailRef = useRef();
@@ -16,7 +17,7 @@ export default function SignUp() {
 
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
-    const { signup } = useAuth();
+    const { signup, login, currentUser } = useAuth();
     const history = useHistory();
 
     async function handleSubmit(e) {
@@ -25,7 +26,11 @@ export default function SignUp() {
             setError("");
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
+            setTimeout(500);
+            await login(emailRef.current.value, passwordRef.current.value);
+            setTimeout(500);
             database.users.add({
+                userId: firebase.auth().currentUser.uid,
                 email: emailRef.current.value,
                 password: passwordRef.current.value,
                 name: nameRef.current.value,
@@ -36,7 +41,7 @@ export default function SignUp() {
                 company_number: companyNumberRef.current.value,
                 // createdAt: database.getCurrentTimestamp(),
             });
-            history.push("/login");
+            history.push("/");
         } catch {
             setError("Failed to create an account")
         }

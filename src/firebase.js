@@ -16,9 +16,9 @@ const app = firebase.initializeApp({
 const firestore = app.firestore()
 export const database = {
     users: firestore.collection("users"),
-    // formatDoc: doc => {
-    //     return { id: doc.id, ...doc.data() }
-    // },
+    formatDoc: doc => {
+        return { id: doc.id, ...doc.data() }
+    },
     // getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
 };
 
