@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { useAuth } from '../../Contexts/Auth';
 import { Form, Button, Card, ButtonGroup } from 'react-bootstrap';
 import { Link, useHistory } from "react-router-dom"
+import { useAuth } from '../../Contexts/Auth';
+import { database } from "../../firebase";
 
 export default function SignUp() {
     const emailRef = useRef();
@@ -24,21 +25,22 @@ export default function SignUp() {
             setError("");
             setLoading(true);
             await signup(emailRef.current.value, passwordRef.current.value);
+            database.users.add({
+                email: emailRef.current.value,
+                password: passwordRef.current.value,
+                name: nameRef.current.value,
+                address: addressRef.current.value,
+                plan: planRef,
+                credit_card: creditCardRef.current.value,
+                company_name: companyNameRef.current.value,
+                company_number: companyNumberRef.current.value,
+                // createdAt: database.getCurrentTimestamp(),
+            });
             history.push("/login");
         } catch {
             setError("Failed to create an account")
         }
         setLoading(false);
-
-        // console.log(emailRef.current.value);
-        // console.log(passwordRef.current.value);
-        // console.log(nameRef.current.value);
-        // console.log(addressRef.current.value);
-        // console.log(planRef);
-        // console.log(creditCardRef.current.value);
-        // console.log(companyNameRef.current.value);
-        // console.log(companyNumberRef.current.value);
-
     }
 
     function selectPlan(e) {
