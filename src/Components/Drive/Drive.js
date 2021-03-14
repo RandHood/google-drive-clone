@@ -46,7 +46,6 @@ export default function Drive() {
                 const docs = snapshot.docs.map(doc => doc.data());
                 setUserInfo(docs[0]);
                 setInfoLoaded(true);
-                // console.log(userInfo);
             });
     }
 
@@ -88,7 +87,6 @@ export default function Drive() {
                 const docs = snapshot.docs.map(doc => doc.data());
                 setUserFiles(docs);
                 setFilesLoaded(true);
-                // console.log(userFiles);
             });
     }
 
@@ -104,8 +102,6 @@ export default function Drive() {
                 userId={file.userId}
             />
         );
-        userFiles.forEach(file => console.log(file));
-        console.log(elements);
     }
 
     return (

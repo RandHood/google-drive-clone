@@ -39,7 +39,6 @@ export default function SignUp() {
                 credit_card: creditCardRef.current.value,
                 company_name: companyNameRef.current.value,
                 company_number: companyNumberRef.current.value,
-                // createdAt: database.getCurrentTimestamp(),
             });
             history.push("/");
         } catch {

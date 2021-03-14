@@ -3,20 +3,10 @@ a, a:link, a:visited, a:active, a:hover {
     color: rgb(100, 100, 100);
 }
 
-/* a:hover {
-    text-decoration: none !important;
-    color: rgb(100, 100, 100);
-} */
-
 .entry-container {
     border-top: 1px solid rgb(220, 220, 220);
     height: 50px;
     align-items: start;
-    
-    /* vertical-align: middle */
-    /* display: flex; */
-    /* flex-direction: row; */
-    /* margin: auto; */
 }
 
 .entry-container:hover {
@@ -24,10 +14,6 @@ a, a:link, a:visited, a:active, a:hover {
 }
 
 .entry {
-    /* padding: auto;
-    margin: auto; */
-    /* vertical-align: middle; */
-    /* margin-bottom: -10px; */
     padding: 10px;
 }
 

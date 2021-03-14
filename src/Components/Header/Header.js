@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from '../../Contexts/Auth';
@@ -22,7 +22,6 @@ export default function Header(props) {
             </Navbar.Brand>
             <Nav className="rightSide">
                 <NavDropdown className="userDropdown" title={props.name} id="basic-nav-dropdown">
-                    {/* <NavDropdown.Item className="w-30">Action</NavDropdown.Item> */}
                     <NavDropdown.Item className="logout" onClick={handleLogout}>Logout</NavDropdown.Item>
                 </NavDropdown>
             </Nav>
