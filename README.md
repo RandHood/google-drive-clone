@@ -1,4 +1,4 @@
-# Trending Repos
+# Google Drive Clone
 
 This is a simple project mimicking some of Google Drive's features and look.
 
