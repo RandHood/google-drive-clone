@@ -9,9 +9,11 @@ export default function Drive() {
     const { currentUser } = useAuth();
     const [userInfo, setUserInfo] = useState("");
     const [infoLoaded, setInfoLoaded] = useState(false);
+    const [filesLoaded, setFilesLoaded] = useState(false);
     const [uploadModal, setUploadModal] = useState(false);
     const [confirmModal, setConfirmModal] = useState(false);
     const [uploadFiles, setUploadFiles] = useState([]);
+    const [userFiles, setUserFiles] = useState([]);
 
     function openUploadModal() {
         setUploadModal(true);
@@ -40,6 +42,7 @@ export default function Drive() {
                 const docs = snapshot.docs.map(doc => doc.data());
                 setUserInfo(docs[0]);
                 setInfoLoaded(true);
+                // console.log(userInfo);
             });
     }
 
@@ -53,11 +56,41 @@ export default function Drive() {
         uploadFiles.forEach(file => {
             const filePath = '/files/' + currentUser.uid + '/' + file.name;
             const uploadTask = storage.ref(filePath).put(file);
+        uploadTask.on(
+            "state_changed",
+            snapshot => {},
+            () => {},
+            () => {
+                uploadTask.snapshot.ref.getDownloadURL().then(url => {
+                    database.files.add({
+                        url: url,
+                        name: file.name,
+                        userId: currentUser.uid,
+                    });
+                });
+                setFilesLoaded(false);
+            });
         });
         closeConfirmModal();
     }
 
+    function getUserFiles() {
+        if (filesLoaded)
+            return;
+        return database.files
+            .where("userId", "==", currentUser.uid)
+            .get()
+            .then(snapshot => {
+                const docs = snapshot.docs.map(doc => doc.data());
+                setUserFiles(docs);
+                setFilesLoaded(true);
+                console.log(userFiles);
+            });
+    }
+
     getUserDocument();
+    getUserFiles();
+    
     return (
         <div>
             <Header name={userInfo.name} />
