@@ -39,7 +39,7 @@ Create a Firebase project and activate the following:
 allow read, write: if request.auth != null;
 ```
 
-Once you finish that, create a file named `env.local` in your app directory and set these values with the ones of your Firebase project.
+Once you finish that, create a file named `.env.local` in your app directory and set these values with the ones of your Firebase project.
 ```
 REACT_APP_FIREBASE_API_KEY=123456789012345678901234567890
 REACT_APP_FIREBASE_AUTH_DOMAIN=project-name-12345.firebaseapp.com
