@@ -4,6 +4,7 @@ import Header from '../Header/Header'
 import { useAuth } from '../../Contexts/Auth'
 import { database, storage } from "../../firebase"
 import Dropzone from 'react-dropzone'
+import File from './File'
 
 export default function Drive() {
     const { currentUser } = useAuth();
@@ -84,17 +85,34 @@ export default function Drive() {
                 const docs = snapshot.docs.map(doc => doc.data());
                 setUserFiles(docs);
                 setFilesLoaded(true);
-                console.log(userFiles);
+                // console.log(userFiles);
             });
     }
 
     getUserDocument();
     getUserFiles();
     
+    let elements = undefined;
+    if (filesLoaded) {
+        elements = userFiles.map((file) =>
+            <File
+                name={file.name}
+                url={file.url}
+                userId={file.userId}
+            />
+        );
+        userFiles.forEach(file => console.log(file));
+        console.log(elements);
+    }
+
     return (
         <div>
             <Header name={userInfo.name} />
             <Button onClick={openUploadModal}>Upload</Button>
+
+            <div className="filesList">
+                {elements}
+            </div>
 
             <Modal show={uploadModal} onHide={closeUploadModal}>
                 <Dropzone onDrop={acceptedFiles => confirmUpload(acceptedFiles)}>
