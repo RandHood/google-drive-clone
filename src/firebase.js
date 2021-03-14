@@ -22,5 +22,6 @@ export const database = {
     // getCurrentTimestamp: firebase.firestore.FieldValue.serverTimestamp,
 };
 
+export const storage = app.storage();
 export const auth = app.auth();
 export default app;

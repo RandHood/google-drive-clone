@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Navbar, Nav, NavDropdown, Button } from "react-bootstrap";
 import { Link, useHistory } from "react-router-dom";
 import { useAuth } from '../../Contexts/Auth';
-import { database } from "../../firebase";
 
 export default function Header(props) {
     const { logout } = useAuth();
@@ -14,7 +13,7 @@ export default function Header(props) {
     }
 
     return (
-        <Navbar bg="light" expand="sm">
+        <Navbar bg="light" expand="lg">
             <Navbar.Brand as={Link} to="/">
                 Google Drive Clone
             </Navbar.Brand>
