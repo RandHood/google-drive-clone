@@ -1,0 +1,74 @@
+@font-face {
+    font-family: 'Product Sans';
+    src: url('./../../Assets/Fonts/product-sans/Product Sans Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Product Sans Bold';
+    src: url('./../../Assets/Fonts/product-sans/Product Sans Bold.ttf');
+}
+
+@font-face {
+    font-family: 'Product Sans Italic';
+    src: url('./../../Assets/Fonts/product-sans/Product Sans Italic.ttf');
+}
+
+@font-face {
+    font-family: 'Product Sans Bold Italic';
+    src: url('./../../Assets/Fonts/product-sans/Product Sans Bold Italic.ttf');
+}
+
+.app {
+    font-family: 'Product Sans';
+}
+
+.upload-btn {
+    /* background-image: url('./../../Assets/Images/upload.png'); */
+    background-color: rgb(250, 250, 250);
+    border: 1px solid rgb(220, 220, 220);
+    width: 120px;
+    height: 50px;
+    border-radius: 25px;
+    margin: 10px;
+}
+
+.upload-img {
+    width: 24px;
+    margin: 0 15px 0 -15px;
+}
+
+.list-top {
+    color: rgb(110, 110, 110);
+    border-bottom: 1px solid rgb(220, 220, 220);
+    width: 100%;
+    height: 40px;
+}
+
+.filesList {
+    padding: 0 15%;
+}
+
+.dropzone{
+    /* padding: 5%; */
+    width: 500px;
+    height: 200px;
+}
+
+.drag-p {
+    margin: auto;
+    padding: 10px;
+    text-align: center;
+    height: 100px;
+}
+
+.dragIcon {
+    margin: 10% 40%;
+    /* padding: 0 40%; */
+    text-align: center;
+    height: 100px;
+}
+
+/* .drag-div {
+    width: 100%;
+    height: 500px;
+} */

@@ -5,6 +5,9 @@ import { useAuth } from '../../Contexts/Auth'
 import { database, storage } from "../../firebase"
 import Dropzone from 'react-dropzone'
 import File from './File'
+import './Drive.css'
+import uploadIcon from './../../Assets/Images/upload.png'
+import dragUploadIcon from './../../Assets/Images/dragUpload.png'
 
 export default function Drive() {
     const { currentUser } = useAuth();
@@ -106,21 +109,29 @@ export default function Drive() {
     }
 
     return (
-        <div>
+        <div className="app">
             <Header name={userInfo.name} />
-            <Button onClick={openUploadModal}>Upload</Button>
+            <button className="upload-btn" onClick={openUploadModal}>
+                <img src={uploadIcon} className="upload-img" alt="upload"/>
+                <span>New</span>
+            </button>
 
             <div className="filesList">
+                <div className="list-top">
+                    <span>Name</span>
+                </div>
                 {elements}
             </div>
 
-            <Modal show={uploadModal} onHide={closeUploadModal}>
-                <Dropzone onDrop={acceptedFiles => confirmUpload(acceptedFiles)}>
+            <Modal show={uploadModal} onHide={closeUploadModal} size="lg">
+                <Dropzone className="dropzone" onDrop={acceptedFiles => confirmUpload(acceptedFiles)}>
                     {({getRootProps, getInputProps}) => (
                         <section>
-                        <div {...getRootProps()}>
+                        <div className="drag-div" {...getRootProps()}>
                             <input {...getInputProps()} />
-                            <p>Drag 'n' drop some files here, or click to select files</p>
+                            <img className="dragIcon" src={dragUploadIcon} alt="drag" />
+                            <p className="drag-p" >Drag and drop Files here to Upload</p>
+                            <p className="drag-p" >or click to select files</p>
                         </div>
                         </section>
                     )}
@@ -128,7 +139,7 @@ export default function Drive() {
             </Modal>
             
             <Modal show={confirmModal} onHide={closeConfirmModal}>
-                <p>Would you like to upload {uploadFiles.length} files?</p>
+                <p className="drag-p">Would you like to upload {uploadFiles.length} files?</p>
                 <Button onClick={handleUploadFiles}>Confirm</Button>
             </Modal>
         </div>
